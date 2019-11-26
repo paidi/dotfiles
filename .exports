@@ -1,0 +1,16 @@
+# vim as default
+export EDITOR="emacs"
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X"
+
+# Prefer UK English and use UTF-8
+export LC_ALL="en_GB.UTF-8"
+export LANG="en_GB"
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# here's LS_COLORS
+# github.com/trapd00r/LS_COLORS
+# command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
+# eval "$(gdircolors -b ~/.dircolors)"
