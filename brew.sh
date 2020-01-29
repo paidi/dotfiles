@@ -78,5 +78,9 @@ brew install python
 brew install python-pip
 brew install R
 
+# Ensure we have gettext installed
+brew install gettext
+brew link --force gettext
+
 # Remove outdated versions from the cellar
 brew cleanup

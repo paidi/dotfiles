@@ -7,9 +7,32 @@ source /usr/local/share/antigen/antigen.zsh
 # Load Antigen configurations
 antigen init .antigenrc
 
-
 # Tell antigen that you're done.
-#antigen apply
+antigen apply
+
+###
+
+# Tracks your most used directories, based on 'frecency'.
+antigen bundle robbyrussell/oh-my-zsh plugins/z
+
+# nicoulaj's moar completion files for zsh -- not sure why disabled.
+# antigen bundle zsh-users/zsh-completions src
+
+# Syntax highlighting on the readline
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# history search
+antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
+
+# suggestions
+antigen bundle tarruda/zsh-autosuggestions
+
+# colors for all files!
+antigen bundle trapd00r/zsh-syntax-highlighting-filetypes
+
+# dont set a theme, because pure does it all
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
 ###
 #################################################################################################
