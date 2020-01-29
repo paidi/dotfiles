@@ -1,6 +1,9 @@
 # history
 SAVEHIST=100000
 
+# Ensure we are in the home directory
+cd $HOME
+
 # Load Antigen
 source /usr/local/share/antigen/antigen.zsh
 
