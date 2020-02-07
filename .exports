@@ -1,4 +1,4 @@
-# vim as default
+# emacs as default
 export EDITOR="emacs"
 
 # Don’t clear the screen after quitting a manual page
