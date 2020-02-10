@@ -4,6 +4,6 @@ pip install awscli
 
 curl -L git.io/antigen > antigen.zsh
 
-sed -i 's/usr\/local\/share\/antigen/$PWD/' .zshrc
+sed -i 's@/usr/local/share/antigen@'"$PWD"'@' .zshrc
 
 ./symlink-setup.sh
