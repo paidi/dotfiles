@@ -1,10 +1,10 @@
 (elpy-enable)
 ;;use IPython
-;; (elpy-use-ipython)
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i --simple-prompt")
 
-(require 'py-autopep8)
-(setq py-autopep8-options '("--max-line-length=120"))
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;; Use python3
+(setq elpy-rpc-python-command "python3")
 
 (add-hook 'elpy-mode-hook
   (lambda()
