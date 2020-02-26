@@ -219,7 +219,6 @@
 ;; Language-specific
 (load "setup-clojure.el")
 (load "setup-python.el")
-(load "setup-scala.el")
 
 ;; Colour mach parens and other structure characters to make code easy to follow
 (custom-set-variables
