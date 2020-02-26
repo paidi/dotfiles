@@ -132,9 +132,6 @@
 
     request
 
-    ;; Scala mode
-    scala-mode
-
     ;; Enhanced M-x
     smex
 
@@ -253,7 +250,7 @@
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (## pytest flymake-json python-pylint docker dockerfile-mode ensime xclip yaml-mode volatile-highlights use-package smex scala-mode rainbow-mode ipython python-mode projectile paredit monokai-theme markdown-mode magit lua-mode json-mode inf-ruby ido-ubiquitous helm haskell-mode gradle-mode gist expand-region ess deft cuda-mode clojure-mode-extra-font-locking ac-cider cider auto-complete)))
+    (## pytest flymake-json python-pylint docker dockerfile-mode xclip yaml-mode volatile-highlights use-package smex scala-mode rainbow-mode ipython python-mode projectile paredit monokai-theme markdown-mode magit lua-mode json-mode inf-ruby ido-ubiquitous helm haskell-mode gradle-mode gist expand-region ess deft cuda-mode clojure-mode-extra-font-locking ac-cider cider auto-complete)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
