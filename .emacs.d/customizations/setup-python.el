@@ -1,7 +1,8 @@
 (elpy-enable)
 ;;use IPython
 (setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "-i --simple-prompt")
+      python-shell-interpreter-args "-i --simple-prompt -c exec('__import__(\\'readline\\')')"
+      python-shell-prompt-detect-failure-warning nil)
 
 ;; Use python3
 (setq elpy-rpc-python-command "python3")
