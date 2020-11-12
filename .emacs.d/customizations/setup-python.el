@@ -7,6 +7,8 @@
 ;; Use python3
 (setq elpy-rpc-python-command "python3")
 
+(setq python-indent-offset 4)
+
 (add-hook 'elpy-mode-hook
   (lambda()
     (add-hook 'write-contents-functions

@@ -17,7 +17,7 @@ if [ "$TERM" != dumb ] && [ -n "$GRC" ]
     then
         alias colourify="$GRC -es --colour=auto"
         alias configure='colourify ./configure'
-        for app in {diff,make,gcc,g++,ping,traceroute}; do
+        for app in {diff,gcc,g++,ping,traceroute}; do
             alias "$app"='colourify '$app
     done
 fi
@@ -52,3 +52,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export PATH=$PATH:$HOME/projects/eng/build-tools/scripts
 export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:$HOME/Library/Python/3.7/bin
+
+export PATH="$HOME/.rbenv/shims:$PATH"
+eval "$(rbenv init -)"

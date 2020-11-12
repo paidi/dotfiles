@@ -54,7 +54,7 @@
     ;; syntax highlighting for CUDA
     cuda-mode
 
-    ;; emacs mode for quicly browsing, filtering and editing directories
+    ;; emacs mode for quickly browsing, filtering and editing directories
     ;; of plain text nodes
     deft
 
@@ -62,7 +62,7 @@
     elpy
     flycheck
     py-autopep8
-    pyvenv
+    pyenv-mode
     ein
 
     ;; Emacs Speaks Statistics
@@ -82,9 +82,6 @@
 
     ;; Helm -
     helm
-
-    ;; Fancy completion all over emacs
-    ido-ubiquitous
 
     ;; Provides a REPL for ruby
     inf-ruby
@@ -249,7 +246,7 @@
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (## pytest flymake-json python-pylint docker dockerfile-mode xclip yaml-mode volatile-highlights use-package smex scala-mode rainbow-mode ipython python-mode projectile paredit monokai-theme markdown-mode magit lua-mode json-mode inf-ruby ido-ubiquitous helm haskell-mode gradle-mode gist expand-region ess deft cuda-mode clojure-mode-extra-font-locking ac-cider cider auto-complete)))
+    (pyenv-mode-auto pyenv-mode cython-mode ## pytest flymake-json python-pylint docker dockerfile-mode xclip yaml-mode volatile-highlights use-package smex scala-mode rainbow-mode ipython python-mode projectile paredit monokai-theme markdown-mode magit lua-mode json-mode inf-ruby helm haskell-mode gradle-mode gist expand-region ess deft cuda-mode clojure-mode-extra-font-locking ac-cider cider auto-complete)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
@@ -299,11 +296,6 @@
 
 ;; Clean whitespace
 (add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; Load ido-ubiquituous
-(ido-mode 1)
-(ido-everywhere 1)
-(ido-ubiquitous-mode 1)
 
 ;; Autocomplete mode settings
 (ac-config-default)
