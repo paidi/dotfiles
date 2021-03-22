@@ -52,6 +52,3 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export PATH=$PATH:$HOME/projects/eng/build-tools/scripts
 export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:$HOME/Library/Python/3.7/bin
-
-export PATH="$HOME/.rbenv/shims:$PATH"
-eval "$(rbenv init -)"

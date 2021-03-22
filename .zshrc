@@ -91,6 +91,3 @@ PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 # pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-
-source /dev/stdin < <(beno-cli auth init)

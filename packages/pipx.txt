@@ -1,0 +1,24 @@
+--include-deps jupyterlab
+argcomplete
+autoflake
+awscli
+black
+bump2version
+cookiecutter
+docformatter
+emacs-keys-everywhere
+flake8
+gimme-aws-creds
+git-up
+isort[pyproject]
+jupyter-console
+pip-tools
+pipenv
+poetry
+powerline-status
+pre-commit
+pyment
+python-language-server
+tox
+twine
+httpie
