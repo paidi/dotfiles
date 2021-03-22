@@ -36,6 +36,9 @@
   :init
   (exec-path-from-shell-initialize))
 
+(use-package f
+  :straight t)
+
 (use-package flycheck
   :straight t
   :init
@@ -128,19 +131,19 @@
   (defun fix-python-password-entry ()
     (push
      'comint-watch-for-password-prompt comint-output-filter-functions))
-  
-  (defun my-setup-python (orig-fun &rest args)
-    "Use corresponding kernel"
-    (let* ((curr-python (car (split-string (pyenv--version-name) ":")))
-           (python-shell-buffer-name (concat "Python-" curr-python))
-	   (python-shell-interpreter-args (if (bound-and-true-p djangonaut-mode)
-					      "shell_plus -- --simple-prompt"
-					    (concat "--simple-prompt --kernel=" curr-python))))
-      (apply orig-fun args)))
-  
-  (advice-add 'python-shell-get-process-name :around #'my-setup-python)
-  (advice-add 'python-shell-calculate-command :around #'my-setup-python)
 
+  (defun activate-local-venv ()
+    "Activate local python version, if it exists"
+    (f-traverse-upwards
+     (lambda (path)
+       (let ((python-version-path (f-expand ".python-version" path)))
+	 (if (f-exists? python-version-path)
+	     (pyvenv-workon (s-trim (f-read-text python-version-path))))
+	 )
+       )
+     )
+    )
+  
   ;; Add support for auto-generation of docstrings (buftra and pyment)
   (use-package buftra
     :straight (:host github :repo "humitos/buftra.el"))
@@ -169,16 +172,25 @@
     :straight (:host github :repo "humitos/py-cmd-buffer.el")
     :hook (python-mode . py-docformatter-enable-on-save)
     :config
-    (setq py-docformatter-options '("--wrap-summaries=88" "--pre-summary-newline")))
+    (setq py-docformatter-options '("--wrap-summaries=100" "--pre-summary-newline")))
 
   ;; Auto-formatting with black
   (use-package blacken
     :straight t
     :hook (python-mode . blacken-mode)
     :config
-    (setq blacken-line-length '88))
+    (setq blacken-line-length '100))
 
-  ;; TODO Add pyenv
+  (use-package pyenv-mode
+    :straight t
+    :init
+    (add-to-list 'exec-path "~/.pyenv/shims")    
+    (setenv "WORKON_HOME" "~/.pyenv/versions/")
+    :config
+    (pyenv-mode)
+    (add-hook 'find-file-hook 'activate-local-venv)
+    )
+  
   (use-package elpy
     :straight t
     :bind
@@ -192,11 +204,13 @@
     :init
     (elpy-enable)
     :config
+    ; fix for MacOS, see https://github.com/jorgenschaefer/elpy/issues/1550
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-					; fix for MacOS, see https://github.com/jorgenschaefer/elpy/issues/1550
     (setq elpy-shell-echo-output nil)
     (setq elpy-rpc-python-command "python3")
-    (setq elpy-rpc-timeout 2))
+    (setq elpy-rpc-timeout 2)
+    (setq python-indent-offset 4)
+    )
   
   (use-package jupyter
     :straight t

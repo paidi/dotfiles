@@ -1,0 +1,4 @@
+jedi==0.17.2
+ipdb
+importmagic
+jupyter-console
