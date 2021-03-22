@@ -207,7 +207,8 @@
     ; fix for MacOS, see https://github.com/jorgenschaefer/elpy/issues/1550
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (setq elpy-shell-echo-output nil)
-    (setq elpy-rpc-python-command "python3")
+    (setq elpy-rpc-virtualenv-path 'current)
+    ;;(setq elpy-rpc-python-command "python3")
     (setq elpy-rpc-timeout 2)
     (setq python-indent-offset 4)
     )
