@@ -101,18 +101,18 @@
  org-default-notes-file (concat (file-name-as-directory org-directory) "notes.org")
  )
 
-(use-package projectile
-  :straight t
-  :diminish projectile-mode
-  :init
-  ;; this must be done before :config so we can't use :bind
-  (define-key global-map (kbd "C-c p") 'projectile-command-map)
-  :config
-  (projectile-mode)
-  (setq projectile-globally-ignored-files
-        (append '("*.txt" "*.o" "*.so" "*.csv" "*.tsv" "*~" "*.orig" "*#")
-                projectile-globally-ignored-files))
-  )
+;; (use-package projectile
+;;   :straight t
+;;   :diminish projectile-mode
+;;   :init
+;;   ;; this must be done before :config so we can't use :bind
+;;   (define-key global-map (kbd "C-c p") 'projectile-command-map)
+;;   :config
+;;   (projectile-mode)
+;;   (setq projectile-globally-ignored-files
+;;         (append '("*.txt" "*.o" "*.so" "*.csv" "*.tsv" "*~" "*.orig" "*#")
+;;                 projectile-globally-ignored-files))
+;;   )
 
 ;;; Python
 
@@ -231,6 +231,8 @@
     )
 )
 
+(load "custom.el")
+
 (use-package session
   :straight t
   :init
@@ -264,3 +266,5 @@
         ("TAB" . nil))
   :config
   (yas-global-mode))
+
+
