@@ -5,7 +5,7 @@ SAVEHIST=100000
 cd $HOME
 
 # Load Antigen
-source /usr/local/share/antigen/antigen.zsh
+source $HOME/bin/antigen.zsh
 
 # Load Antigen configurations
 antigen init .antigenrc
