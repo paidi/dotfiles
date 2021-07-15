@@ -85,5 +85,8 @@ export PATH="$PATH:$HOME/.local/bin"
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+

@@ -4,7 +4,7 @@ set -e
 
 # Install apt deps
 while read pkg; do
-    sudo apt-get install -y --no-install-recommends $pkg
+    apt-get install -y --no-install-recommends $pkg
 done < packages/apt.txt
 
 mkdir $HOME/bin

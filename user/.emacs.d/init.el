@@ -209,7 +209,7 @@
     (setq elpy-shell-echo-output nil)
     (setq elpy-rpc-python-command "python3")
     (setq elpy-rpc-timeout 2)
-    (setq python-indent-offset 4)
+    (setq python-indent-offset 3)
     )
   
   (use-package jupyter
@@ -229,6 +229,76 @@
 	)
     )
 )
+
+;;; R
+
+(use-package ess-site
+  :straight ess
+  :config
+  ;; Execute screen options after initialize process
+  (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
+
+  ;; Disable IDO so helm is used instead
+  (setq ess-use-ido nil)
+
+  ;; We don’t want R evaluation to hang the editor, hence
+  (setq ess-eval-visibly 'nowait)
+
+  ;; Unbind ess-insert-assign (defaut value is "_")
+  (setq ess-smart-S-assign-key nil))
+
+
+(use-package ess-r-mode
+  :straight ess
+  :config
+  ;; Hot key C-S-m for pipe operator in ESS
+  (defun pipe_R_operator ()
+    "R - %>% operator or 'then' pipe operator"
+    (interactive)
+    (just-one-space 1)
+    (insert "%>%")
+    (just-one-space 1))
+
+  ;; ESS syntax highlight
+  (setq ess-R-font-lock-keywords
+	'((ess-R-fl-keyword:keywords . t)
+	  (ess-R-fl-keyword:constants . t)
+	  (ess-R-fl-keyword:modifiers . t)
+	  (ess-R-fl-keyword:fun-defs . t)
+	  (ess-R-fl-keyword:assign-ops . t)
+	  (ess-fl-keyword:fun-calls . t)
+	  (ess-fl-keyword:numbers . t)
+	  (ess-fl-keyword:operators . t)
+	  (ess-fl-keyword:delimiters . t)
+	  (ess-fl-keyword:= . t)
+	  (ess-R-fl-keyword:F&T . t)
+	  (ess-R-fl-keyword:%op% . t)))
+
+  (setq inferior-ess-r-font-lock-keywords
+	'((ess-S-fl-keyword:prompt . t)
+	  (ess-R-fl-keyword:messages . t)
+	  (ess-R-fl-keyword:modifiers . nil)
+	  (ess-R-fl-keyword:fun-defs . t)
+	  (ess-R-fl-keyword:keywords . nil)
+	  (ess-R-fl-keyword:assign-ops . t)
+	  (ess-R-fl-keyword:constants . t)
+	  (ess-fl-keyword:matrix-labels . t)
+	  (ess-fl-keyword:fun-calls . nil)
+	  (ess-fl-keyword:numbers . nil)
+	  (ess-fl-keyword:operators . nil)
+	  (ess-fl-keyword:delimiters . nil)
+	  (ess-fl-keyword:= . t)
+	  (ess-R-fl-keyword:F&T . nil)))
+
+  :bind
+  (:map ess-r-mode-map
+	("M--" . ess-insert-assign)
+	("C-S-m" . pipe_R_operator)
+	:map
+	inferior-ess-r-mode-map
+	("M--" . ess-insert-assign)
+	("C-S-m" . pipe_R_operator))
+  )
 
 (use-package session
   :straight t
@@ -263,3 +333,30 @@
         ("TAB" . nil))
   :config
   (yas-global-mode))
+
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max))
+	;; This would override `fill-column' if it's an integer.
+	(emacs-lisp-docstring-fill-column t))
+    (fill-paragraph nil region)))
+
+(define-key global-map "\M-Q" 'unfill-paragraph)
+
+
+;; Julia
+(straight-override-recipe
+ '(julia-mode :type git :host github :repo "non-Jedi/julia-emacs" :branch "devel"))
+(straight-use-package 'julia-mode)
+(add-hook 'julia-mode-hook #'(lambda () (abbrev-mode 1)))
+
+;; (straight-use-package
+;;  '(eglot-jl :type git :host github :repo "non-Jedi/eglot-jl" :files ("*.el" "*.jl" "*.toml")))
+
+;; (with-eval-after-load 'eglot
+;;     (eglot-jl-init))
+
+;; ;; Disable line numbers
+;; (global-linum-mode 0)
