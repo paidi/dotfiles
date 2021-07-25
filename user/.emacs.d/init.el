@@ -231,8 +231,6 @@
     )
 )
 
-(load "custom.el")
-
 (use-package session
   :straight t
   :init
@@ -267,4 +265,6 @@
   :config
   (yas-global-mode))
 
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
 
