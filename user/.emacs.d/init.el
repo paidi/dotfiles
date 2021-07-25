@@ -117,7 +117,7 @@
   :hook (inferior-python-mode . fix-python-password-entry)
   :config
 
-  (setq python-shell-interpreter "jupyter-console"
+  (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt"
         python-shell-prompt-detect-failure-warning nil)
   (add-to-list 'python-shell-completion-native-disabled-interpreters
@@ -196,8 +196,11 @@
 	  ("C-M-p" . elpy-nav-backward-block))
     :hook ((elpy-mode . flycheck-mode)
 	   (elpy-mode . (lambda ()
-			  (set (make-local-variable 'company-backends)
-			       '((elpy-company-backend :with company-yasnippet))))))
+                          (set (make-local-variable 'company-backends)
+                               '((elpy-company-backend :with company-yasnippet)))))
+	   (elpy-mode . (lambda () (highlight-indentation-mode -1)))
+	   )
+
     :init
     (elpy-enable)
     :config
@@ -205,27 +208,27 @@
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (setq elpy-shell-echo-output nil)
     (setq elpy-rpc-virtualenv-path 'current)
-    ;;(setq elpy-rpc-python-command "python3")
+    ;; (setq elpy-rpc-python-command "python3")
     (setq elpy-rpc-timeout 2)
-    (setq python-indent-offset 3)
+    (setq python-indent-offset 4)
     )
   
-  (use-package jupyter
-    :straight t
-    :hook
-    (jupyter-repl-mode . (lambda ()
-			   (setq company-backends '(company-capf))))
-    :bind
-    (:map jupyter-repl-mode-map
-	  ("C-M-n" . jupyter-repl-history-next)
-	  ("C-M-p" . jupyter-repl-history-previous)
-	  ("M-n" . jupyter-repl-forward-cell)
-	  ("M-p" . jupyter-repl-backward-cell)
-	  :map jupyter-repl-interaction-mode-map
-	  ("M-i" . nil)
-	("C-?" . jupyter-inspect-at-point)
-	)
-    )
+  ;; (use-package jupyter
+  ;;   :straight t
+  ;;   :hook
+  ;;   (jupyter-repl-mode . (lambda ()
+  ;; 			   (setq company-backends '(company-capf))))
+  ;;   :bind
+  ;;   (:map jupyter-repl-mode-map
+  ;; 	  ("C-M-n" . jupyter-repl-history-next)
+  ;; 	  ("C-M-p" . jupyter-repl-history-previous)
+  ;; 	  ("M-n" . jupyter-repl-forward-cell)
+  ;; 	  ("M-p" . jupyter-repl-backward-cell)
+  ;; 	  :map jupyter-repl-interaction-mode-map
+  ;; 	  ("M-i" . nil)
+  ;; 	("C-?" . jupyter-inspect-at-point)
+  ;; 	)
+  ;;   )
 )
 
 ;;; R

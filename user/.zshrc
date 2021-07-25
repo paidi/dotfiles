@@ -97,4 +97,4 @@ if [ -f '/Users/paidi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/paidi/goo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/paidi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/paidi/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm@11/bin:$PATH"
