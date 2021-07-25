@@ -35,7 +35,7 @@ antigen bundle trapd00r/zsh-syntax-highlighting-filetypes
 
 # dont set a theme, because pure does it all
 antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+#antigen bundle sindresorhus/pure
 
 ###
 #################################################################################################
@@ -90,3 +90,11 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/paidi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/paidi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/paidi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/paidi/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"

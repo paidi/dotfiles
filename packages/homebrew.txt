@@ -20,6 +20,7 @@ jq
 kubectl
 moreutils
 ncdu
+openblas
 pidcat
 pipx
 pv

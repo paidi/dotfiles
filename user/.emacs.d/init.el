@@ -82,16 +82,13 @@
    ("\\.markdown\\'" . markdown-mode)))
 
 (use-package org
-  :mode (("\\.org$" . org-mode))  
+  :mode (("\\.org$" . org-mode))
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c a" . org-agenda)
+  ("C-c c" . org-capture)
   :straight t)
 
-(use-package org-plus-contrib
-   :mode (("\\.org$" . org-mode))
-   :bind
-   ("C-c l" . org-store-link)
-   ("C-c a" . org-agenda)
-   ("C-c c" . org-capture)
-   )
 
 (setq
  org-directory (concat (file-name-as-directory (getenv "HOME")) "org")

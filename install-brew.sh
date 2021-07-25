@@ -18,3 +18,5 @@ fi
 while read pkg; do
     brew install $pkg
 done < packages/homebrew.txt
+
+echo 'OPENBLAS="$(brew --prefix openblas)"' >> user/.zprofile
