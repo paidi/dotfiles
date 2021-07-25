@@ -5,7 +5,7 @@ SAVEHIST=100000
 cd $HOME
 
 # Load Antigen
-source /usr/local/share/antigen/antigen.zsh
+source $HOME/bin/antigen.zsh
 
 # Load Antigen configurations
 antigen init .antigenrc
@@ -85,5 +85,8 @@ export PATH="$PATH:$HOME/.local/bin"
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+

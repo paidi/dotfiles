@@ -1,4 +1,7 @@
 #!/bin/bash
+set -e
+
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
 # install extra pyenv plugins
 pyenv_plugins=(
@@ -14,7 +17,10 @@ while read pkg; do
     pipx install $pkg
 done < packages/pipx.txt
 
-# Install recent python versions
-pyenv install 3.9.2
-pyenv install 3.8.6
-pyenv install 3.7.10
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+pyenv install 3.9.6
+pyenv install 3.8.11
+pyenv install 3.7.11
