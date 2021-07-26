@@ -18,3 +18,6 @@ fi
 while read pkg; do
     brew install $pkg
 done < packages/homebrew.txt
+
+echo 'export PATH="/opt/homebrew/opt/llvm@11/bin:$PATH"' >> ~/.zshrc
+echo 'OPENBLAS="$(brew --prefix openblas)"' >> user/.zshrc
