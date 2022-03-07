@@ -9,7 +9,6 @@ emacs
 entr
 ffmpeg
 findutils
-fzf
 gettext
 git
 htop
