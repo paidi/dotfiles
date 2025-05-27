@@ -13,14 +13,10 @@ for plugin in "${pyenv_plugins[@]}"; do
     git clone https://github.com/$plugin $(pyenv root)/plugins/$plugin_name
 done
 
-while read pkg; do
-    pipx install $pkg
-done < packages/pipx.txt
-
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-pyenv install 3.9.6
-pyenv install 3.8.11
-pyenv install 3.7.11
+CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" pyenv install 3.9.6
+CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" pyenv install 3.8.11
+CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" pyenv install 3.7.11

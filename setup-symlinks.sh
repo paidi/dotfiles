@@ -125,7 +125,6 @@ print_success() {
 declare -a FILES_TO_SYMLINK=$(find user -name ".*" -maxdepth 1 -not -name .DS_Store -not -name .git -not -name .osx)
 echo $FILES_TO_SYMLINK
 
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 main() {

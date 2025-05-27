@@ -90,11 +90,37 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/Users/paidi/.gem/ruby/2.6.0/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
+export CLOUDSDK_PYTHON_SITEPACKAGES=1.
+
+export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home/
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/paidi/mosaic/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/paidi/mosaic/etc/profile.d/conda.sh" ]; then
+        . "/Users/paidi/mosaic/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/paidi/mosaic/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/paidi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/paidi/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/paidi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/paidi/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm@11/bin:$PATH"

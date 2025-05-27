@@ -1,6 +1,7 @@
 jedi==0.17.2
 ipdb
 importmagic
+ipython
 jupyter-console
 rope
 black
