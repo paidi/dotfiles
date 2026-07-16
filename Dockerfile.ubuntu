@@ -1,0 +1,9 @@
+FROM ubuntu:22.04
+
+# Smoke test for the Linux install path (not run automatically; see README).
+# Build:  docker build -f Dockerfile.ubuntu -t dotfiles-ubuntu-test .
+# Run:    docker run -it --rm dotfiles-ubuntu-test zsh
+
+ADD . /root/.dotfiles/
+WORKDIR /root/.dotfiles/
+RUN ./setup.sh

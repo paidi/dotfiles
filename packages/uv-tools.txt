@@ -1,0 +1,15 @@
+# Python CLI tools installed with `uv tool install` by setup-python.sh.
+# Each line is passed verbatim as arguments, so extras/--with flags work.
+# One tool per line, # lines are comments.
+
+ruff
+python-lsp-server[all] --with python-lsp-ruff
+pre-commit
+csvkit
+jupyterlab
+cookiecutter
+argcomplete
+httpie
+twine
+git-up
+gimme-aws-creds

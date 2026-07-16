@@ -1,0 +1,14 @@
+# Generated/local Emacs state - not part of the config
+user/.emacs.d/straight/
+user/.emacs.d/tree-sitter/
+user/.emacs.d/backups/
+user/.emacs.d/.recentf
+user/.emacs.d/history
+user/.emacs.d/places
+user/.emacs.d/eln-cache/
+user/.emacs.d/auto-save-list/
+user/.emacs.d/transient/
+user/.emacs.d/url/
+
+# zsh compiled completion cache
+.zcompdump*

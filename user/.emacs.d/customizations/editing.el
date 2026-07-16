@@ -1,10 +1,20 @@
-;; Customizations relating to editing a buffer.
+;; General editing behaviour
 
-;; Key binding to use "hippie expand" for text autocompletion
-;; http://www.emacswiki.org/emacs/HippieExpand
+(setq-default indent-tabs-mode nil)
+(setq-default fill-column 88)
+
+;; Remember point position in visited files
+(use-package saveplace
+  :init (save-place-mode 1))
+
+;; Keep backups in one place instead of scattering `foo~' everywhere, and
+;; skip auto-save/lockfiles entirely
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+(setq auto-save-default nil)
+(setq create-lockfiles nil)
+
+;; Hippie-expand: a more powerful dabbrev-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
-
-;; Lisp-friendly hippie expand
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
         try-expand-dabbrev-all-buffers
@@ -12,75 +22,40 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
-;; Highlights matching parenthesis
+;; Highlight matching parenthesis
 (show-paren-mode 1)
+(electric-pair-mode 1)
 
-;; Highlight current line
-;;(global-hl-line-mode 1)
+;; Comment/uncomment the current line if no region is active
+(defun comment-or-uncomment-region-or-line ()
+  "Comment or uncomment the current region, or the current line if no
+region is active."
+  (interactive)
+  (if (use-region-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-c C-r") 'comment-or-uncomment-region-or-line)
 
-;; Interactive search key bindings. By default, C-s runs
-;; isearch-forward, so this swaps the bindings.
+;; Swap isearch to regexp-by-default; plain isearch moves to C-M-s/C-M-r
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
-;; Don't use hard tabs
-(setq-default indent-tabs-mode nil)
+;; camelCase/snake_case-aware word motion (M-f, M-b, etc.)
+(use-package subword
+  :diminish subword-mode
+  :init (global-subword-mode))
 
-;; When you visit a file, point goes to the last place where it
-;; was when you previously visited the same file.
-;; http://www.emacswiki.org/emacs/SavePlace
-(require 'saveplace)
-(setq-default save-place t)
-;; keep track of saved places in ~/.emacs.d/places
-(setq save-place-file (concat user-emacs-directory "places"))
+(use-package rainbow-delimiters
+  :straight t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
-;; Emacs can automatically create backup files. This tells Emacs to
-;; put all backups in ~/.emacs.d/backups. More info:
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-                                               "backups"))))
-(setq auto-save-default nil)
-
-
-;; comments
-(defun toggle-comment-on-line ()
-  "comment or uncomment current line"
-  (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-(global-set-key (kbd "C-;") 'toggle-comment-on-line)
-
-;; yay rainbows!
-;;(global-rainbow-delimiters-mode t)
-
-;; use 2 spaces for tabs
-(defun die-tabs ()
-  (interactive)
-  (set-variable 'tab-width 2)
-  (mark-whole-buffer)
-  (untabify (region-beginning) (region-end))
-  (keyboard-quit))
-
-;; fix weird os x kill error
-(defun ns-get-pasteboard ()
-  "Returns the value of the pasteboard, or nil for unsupported formats."
-  (condition-case nil
-      (ns-get-selection-internal 'CLIPBOARD)
-    (quit nil)))
-
-
-;; Handy comment/uncomment function
-(defun comment-or-uncomment-region-or-line ()
-  "Like comment-or-uncomment-region, but if there's no mark \(that means no
-region\) apply comment-or-uncomment to the current line"
-  (interactive)
-  (if (not mark-active)
-      (comment-or-uncomment-region
-       (line-beginning-position) (line-end-position))
-    (if (< (point) (mark))
-        (comment-or-uncomment-region (point) (mark))
-      (comment-or-uncomment-region (mark) (point)))))
-(global-set-key (kbd "C-c C-r") 'comment-or-uncomment-region-or-line)
-
-(setq electric-indent-mode nil)
+;; The opposite of M-q (fill-paragraph): join a paragraph into one line
+(defun unfill-paragraph (&optional region)
+  "Take a multi-line paragraph and make it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+(global-set-key (kbd "M-Q") 'unfill-paragraph)

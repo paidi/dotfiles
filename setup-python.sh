@@ -1,23 +1,27 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+source ./lib.sh
 
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if ! command -v uv >/dev/null 2>&1; then
+    echo "Installing uv..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
-# install extra pyenv plugins
-pyenv_plugins=(
-    jawshooah/pyenv-default-packages
-)
+echo "Installing Python interpreters from packages/python-versions.txt..."
+first=1
+while IFS= read -r version <&3; do
+    if [ "$first" -eq 1 ]; then
+        uv python install --default "$version"
+        first=0
+    else
+        uv python install "$version"
+    fi
+done 3< <(read_package_list packages/python-versions.txt)
 
-for plugin in "${pyenv_plugins[@]}"; do
-    plugin_name=$(echo $plugin | cut -d '/' -f2)
-    git clone https://github.com/$plugin $(pyenv root)/plugins/$plugin_name
-done
-
-
-pyenv install 3.9.6
-pyenv install 3.8.11
-pyenv install 3.7.11
+echo "Installing Python CLI tools from packages/uv-tools.txt..."
+while IFS= read -r tool <&3; do
+    # shellcheck disable=SC2086
+    uv tool install $tool
+done 3< <(read_package_list packages/uv-tools.txt)

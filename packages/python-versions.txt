@@ -1,0 +1,6 @@
+# Python interpreters installed with `uv python install` by setup-python.sh.
+# The first entry is used as the default (`uv python install --default`).
+# One version per line, # lines are comments.
+
+3.12
+3.13

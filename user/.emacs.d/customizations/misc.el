@@ -1,12 +1,14 @@
-;; Changes all yes/no questions to y/n type
-(fset 'yes-or-no-p 'y-or-n-p)
+;; Small standalone tweaks that don't warrant their own file
 
-;; shell scripts
+;; Allow typing y/n instead of yes/no
+(setq use-short-answers t) ; Emacs 28+; falls back harmlessly otherwise
+
+;; Shell scripts: 2-space indent
 (setq-default sh-basic-offset 2)
 (setq-default sh-indentation 2)
 
-;; No need for ~ files when editing
-(setq create-lockfiles nil)
-
-;; Go straight to scratch buffer on startup
+;; Skip the startup screen
 (setq inhibit-startup-message t)
+
+;; Make scripts executable automatically when saved, if they have a shebang
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)

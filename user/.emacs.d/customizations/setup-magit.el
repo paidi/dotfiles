@@ -1,2 +1,6 @@
-;; magit
-(global-set-key (kbd "C-c C-g") 'magit-status)
+;; Git, from inside Emacs
+
+(use-package magit
+  :straight t
+  :commands (magit-status magit-log)
+  :bind ("C-c g" . magit-status))

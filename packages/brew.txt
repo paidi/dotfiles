@@ -1,0 +1,48 @@
+# Installed with `brew install` on both macOS and Linux (via Homebrew on
+# Linux, aka Linuxbrew). One formula name per line, # lines are comments.
+
+# --- shell & terminal ---
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+zsh-history-substring-search
+starship
+zoxide
+fzf
+tmux
+grc
+
+# --- editor ---
+emacs
+
+# --- python tooling (see also packages/uv-tools.txt) ---
+uv
+
+# --- file / text tools ---
+the_silver_searcher
+ripgrep
+fd
+bat
+eza
+jq
+tree
+coreutils
+findutils
+gnu-sed
+moreutils
+rename
+entr
+
+# --- git ---
+git
+
+# --- misc CLI ---
+htop
+ncdu
+wget
+curl
+gettext
+imagemagick
+ffmpeg
+pv
+zopfli

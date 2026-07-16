@@ -1,5 +1,0 @@
-FROM ubuntu:20.04
-
-ADD . /root/
-WORKDIR /root/
-RUN ./setup.sh

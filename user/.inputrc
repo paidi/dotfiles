@@ -1,5 +1,8 @@
 ## SMARTER TAB-COMPLETION (Readline bindings) ##
 
+# Emacs-style keybindings (this is the readline default, but make it explicit)
+set editing-mode emacs
+
 # Perform file completion in a case insensitive fashion
 set completion-ignore-case on
 
